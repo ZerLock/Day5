@@ -13,15 +13,27 @@ const Register = (): JSX.Element => {
 				<VStack spacing="3" w="30%">
 					<Text>Register</Text>
 					<VStack>
-						<Input placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-						<Input placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
 						<Input
+							className="register-input"
+							placeholder="Email"
+							value={email}
+							onChange={(e) => setEmail(e.target.value)}
+						/>
+						<Input
+							className="register-input"
+							placeholder="Password"
+							value={password}
+							onChange={(e) => setPassword(e.target.value)}
+						/>
+						<Input
+							className="register-input"
 							placeholder="Confirmed password"
 							value={passwordConfirmation}
 							onChange={(e) => setPasswordConfirmation(e.target.value)}
 						/>
 					</VStack>
 					<Button
+						id="register-button-register"
 						colorScheme="teal"
 						variant="solid"
 						onClick={() => {
@@ -31,7 +43,11 @@ const Register = (): JSX.Element => {
 						Register
 					</Button>
 					<Link as={RouteLink} to="/login">
-						<Button colorScheme="teal" variant="solid">
+						<Button
+							id="register-button-login"
+							colorScheme="teal"
+							variant="solid"
+						>
 							Login
 						</Button>
 					</Link>

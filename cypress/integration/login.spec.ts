@@ -24,6 +24,6 @@ describe('Click on register redirection button', () => {
     });
 
     it('Click on register button', () => {
-        cy.get('#login-register-button').click().url().should('eq', 'http://localhost:3000/register');
+        cy.get('#login-button-register').click().url().should('eq', 'http://localhost:3000/register');
     });
 });
