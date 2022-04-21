@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes as RoutesRouter } from 'react-router-dom';
 
-import HomePage from '../pages/HomePage';
+import HomePage from '../pages/Home';
 import Register from '../pages/Register';
 
 const Routes = (): JSX.Element => (
