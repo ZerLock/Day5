@@ -43,11 +43,7 @@ const Register = (): JSX.Element => {
 						Register
 					</Button>
 					<Link as={RouteLink} to="/login">
-						<Button
-							id="register-button-login"
-							colorScheme="teal"
-							variant="solid"
-						>
+						<Button id="register-button-login" colorScheme="teal" variant="solid">
 							Login
 						</Button>
 					</Link>
