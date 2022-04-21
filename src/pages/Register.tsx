@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Center, Text, Input, Button, VStack } from '@chakra-ui/react';
+import { Center, Text, Input, Button, VStack, Link } from '@chakra-ui/react';
+import { Link as RouteLink } from 'react-router-dom';
 
 const Register = (): JSX.Element => {
 	const [email, setEmail] = useState('');
@@ -29,6 +30,11 @@ const Register = (): JSX.Element => {
 					>
 						Register
 					</Button>
+					<Link as={RouteLink} to="/login">
+						<Button colorScheme="teal" variant="solid">
+							Login
+						</Button>
+					</Link>
 				</VStack>
 			</Center>
 		</>
