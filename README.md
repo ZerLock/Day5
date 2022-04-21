@@ -1,26 +1,36 @@
 > If you see this section, you've just created a repository using [PoC Innovation's Open-Source project template](https://github.com/PoCInnovation/open-source-project-template). Check the [getting started guide](./.github/getting-started.md).
 
-# [PROJECT'S NAME]
+# Day5 - React
 
-[Project's description]
+PoC software pool 2022 day 5 in React Typescript with Chakra UI
 
 ## How does it work?
 
-[Explain how this project is working]
+React application
 
 ## Getting Started
 
 ### Installation
 
-[Explain how to install all of the project's dependencies]
+```
+# clone the repository
+git clone git@github.com:ZerLock/Day5.git
+cd Day5
+
+# Create docker image
+docker build . -t pool:latest
+```
 
 ### Quickstart
 
-[Explain how to run this project]
+Run the docker image
+```
+docker run -p 3000:3000 pool:latest
+```
 
 ### Usage
 
-[Explain how to use this project]
+React app
 
 ## Get involved
 
@@ -31,11 +41,11 @@ If you're interested in how the project is organized at a higher level, please c
 ## Our PoC team :heart:
 
 Developers
-| [<img src="https://github.com/MrZalTy.png?size=85" width=85><br><sub>[Developer's name]</sub>](https://github.com/MrZalTy) | [<img src="https://github.com/MrZalTy.png?size=85" width=85><br><sub>[Developer's name]</sub>](https://github.com/MrZalTy) | [<img src="https://github.com/MrZalTy.png?size=85" width=85><br><sub>[Developer's name]</sub>](https://github.com/MrZalTy)
-| :---: | :---: | :---: |
+| [<img src="https://github.com/ZerLock.png?size=85" width=85><br><sub>[Dubosclard Léo]</sub>](https://github.com/ZerLock) |
+| :---: |
 
 Manager
-| [<img src="https://github.com/adrienfort.png?size=85" width=85><br><sub>[Manager's name]</sub>](https://github.com/adrienfort)
+| [<img src="https://github.com/adrienfort.png?size=85" width=85><br><sub>[El magnifico Adrien]</sub>](https://github.com/adrienfort)
 | :---: |
 
 <h2 align=center>
