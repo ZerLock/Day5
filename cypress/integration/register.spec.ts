@@ -19,11 +19,11 @@ describe('Good front for Register', () => {
 
 describe('Click on login redirection button', () => {
     it('Go to hove view', () => {
-        cy.visit('http://localhost:300/register');
+        cy.visit('http://localhost:3000/register');
         cy.wait(1000);
     });
 
     it('Click on register button', () => {
-        cy.get('#register-login-button').click().url().should('eq', 'http://localhost:3000/login');
+        cy.get('#register-button-login').click().url().should('eq', 'http://localhost:3000/login');
     });
 });

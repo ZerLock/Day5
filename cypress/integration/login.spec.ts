@@ -19,7 +19,7 @@ describe('Good front for Login', () => {
 
 describe('Click on register redirection button', () => {
     it('Go to hove view', () => {
-        cy.visit('http://localhost:300/login');
+        cy.visit('http://localhost:3000/login');
         cy.wait(1000);
     });
 
