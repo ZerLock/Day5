@@ -10,10 +10,16 @@ const Login = (): JSX.Element => {
 		<>
 			<Center>
 				<VStack>
-					<Text>Login</Text>
-					<Input placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-					<Input placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+					<Text id="login-title">Login</Text>
+					<Input className="login-input" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+					<Input
+						className="login-input"
+						placeholder="Password"
+						value={password}
+						onChange={(e) => setPassword(e.target.value)}
+					/>
 					<Button
+						id="login-button-login"
 						colorScheme="teal"
 						variant="solid"
 						onClick={() => {
@@ -23,7 +29,7 @@ const Login = (): JSX.Element => {
 						Login
 					</Button>
 					<Link as={RouteLink} to="/register">
-						<Button colorScheme="teal" variant="solid">
+						<Button id="login-button-register" colorScheme="teal" variant="solid">
 							Register
 						</Button>
 					</Link>

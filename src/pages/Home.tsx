@@ -5,15 +5,19 @@ const HomePage = (): JSX.Element => (
 	<>
 		<Center>
 			<VStack spacing="3">
-				<Text fontSize="3xl">Artists Book</Text>
-				<Text fontSize="2xl">Manage your favorite artists</Text>
+				<Text id="home-title" fontSize="3xl">
+					Artists Book
+				</Text>
+				<Text id="home-subtitle" fontSize="2xl">
+					Manage your favorite artists
+				</Text>
 				<Link as={RouterLink} to="/register">
-					<Button colorScheme="teal" variant="solid">
+					<Button id="home-register-button" colorScheme="teal" variant="solid">
 						Register
 					</Button>
 				</Link>
 				<Link as={RouterLink} to="/login">
-					<Button colorScheme="teal" variant="solid">
+					<Button id="home-login-button" colorScheme="teal" variant="solid">
 						Login
 					</Button>
 				</Link>
