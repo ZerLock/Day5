@@ -12,6 +12,11 @@ const HomePage = (): JSX.Element => (
 						Register
 					</Button>
 				</Link>
+				<Link as={RouterLink} to="/login">
+					<Button colorScheme="teal" variant="solid">
+						Login
+					</Button>
+				</Link>
 			</VStack>
 		</Center>
 	</>
