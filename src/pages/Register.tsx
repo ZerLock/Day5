@@ -1,11 +1,28 @@
 import { useState } from 'react';
-import { Center, Text, Input, Button, VStack, Link } from '@chakra-ui/react';
-import { Link as RouteLink } from 'react-router-dom';
+import { Center, Text, Input, Button, VStack } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 
 const Register = (): JSX.Element => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [passwordConfirmation, setPasswordConfirmation] = useState('');
+
+	const clearInput = () => {
+		setEmail('');
+		setPassword('');
+		setPasswordConfirmation('');
+	}
+
+	const navigate = useNavigate();
+	const handleRegisterSubmit = () => {
+		if (email && password && passwordConfirmation) {
+			if (password === passwordConfirmation)
+				navigate('/dashboard');
+			else
+				clearInput();
+		} else
+			clearInput();
+	}
 
 	return (
 		<>
@@ -36,17 +53,13 @@ const Register = (): JSX.Element => {
 						id="register-button-register"
 						colorScheme="teal"
 						variant="solid"
-						onClick={() => {
-							console.log(`email: ${email}\npassword: ${password}\npassword Confirmation: ${passwordConfirmation}`);
-						}}
+						onClick={() => handleRegisterSubmit()}
 					>
 						Register
 					</Button>
-					<Link as={RouteLink} to="/login">
-						<Button id="register-button-login" colorScheme="teal" variant="solid">
-							Login
-						</Button>
-					</Link>
+					<Button id="register-button-login" colorScheme="teal" variant="solid" onClick={() => navigate('/login')}>
+						Login
+					</Button>
 				</VStack>
 			</Center>
 		</>
