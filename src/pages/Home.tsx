@@ -1,5 +1,5 @@
 import { Center, Text, Button, Link, VStack } from '@chakra-ui/react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouteLink } from 'react-router-dom';
 
 const HomePage = (): JSX.Element => (
 	<>
@@ -11,14 +11,19 @@ const HomePage = (): JSX.Element => (
 				<Text id="home-subtitle" fontSize="2xl">
 					Manage your favorite artists
 				</Text>
-				<Link as={RouterLink} to="/register">
+				<Link as={RouteLink} to="/register">
 					<Button id="home-register-button" colorScheme="teal" variant="solid">
 						Register
 					</Button>
 				</Link>
-				<Link as={RouterLink} to="/login">
+				<Link as={RouteLink} to="/login">
 					<Button id="home-login-button" colorScheme="teal" variant="solid">
 						Login
+					</Button>
+				</Link>
+				<Link as={RouteLink} to="/dashboard">
+					<Button id="home-dashboard-button" colorScheme="teal" variant="solid">
+						Dashboard
 					</Button>
 				</Link>
 			</VStack>
