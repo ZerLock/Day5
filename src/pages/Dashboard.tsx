@@ -1,21 +1,25 @@
-import { Text, Center, HStack, Link, Button } from '@chakra-ui/react';
-import { Link as RouteLink, Navigate, useNavigate } from 'react-router-dom';
-
-import { IoIosArrowBack } from 'react-icons/io';
+import { useState } from 'react';
+import { Grid } from '@chakra-ui/react';
+import TopBar from '../components/Bar/TopBar';
+import ArtistCard from '../components/Card/ArtistCard';
+import Artist from '../types/artist';
 
 const Dashboard = (): JSX.Element => {
-	const navigate = useNavigate();
+	const [artist] = useState<Artist>({
+		name: 'Léo',
+		rating: 5,
+		nationality: 'FR',
+		musicGender: 'PopHard',
+		photoUrl:
+			'https://www.google.com/url?sa=i&url=https%3A%2F%2Fgithub.com%2FCodingClubLyon&psig=AOvVaw1v-0v13q6DZ5phW0Ju-CZE&ust=1650808972409000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCJis7-SsqvcCFQAAAAAdAAAAABA2',
+	});
 
 	return (
 		<>
-			<HStack h="7vh" top="0px" borderBottom="1px" paddingLeft="1%" marginLeft="1%" marginRight="1%">
-				<Button leftIcon={<IoIosArrowBack />} colorScheme="teal" variant="solid" onClick={() => navigate('/')}>
-					Home
-				</Button>
-				<Button colorScheme="teal" variant="solid">
-					Add Artists
-				</Button>
-			</HStack>
+			<TopBar />
+			<Grid margin="1%" justifyItems="center" templateColumns="repeat(5, 1fr)">
+				<ArtistCard {...artist} />
+			</Grid>
 		</>
 	);
 };

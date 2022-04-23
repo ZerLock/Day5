@@ -11,18 +11,15 @@ const Register = (): JSX.Element => {
 		setEmail('');
 		setPassword('');
 		setPasswordConfirmation('');
-	}
+	};
 
 	const navigate = useNavigate();
 	const handleRegisterSubmit = () => {
 		if (email && password && passwordConfirmation) {
-			if (password === passwordConfirmation)
-				navigate('/dashboard');
-			else
-				clearInput();
-		} else
-			clearInput();
-	}
+			if (password === passwordConfirmation) navigate('/dashboard');
+			else clearInput();
+		} else clearInput();
+	};
 
 	return (
 		<>

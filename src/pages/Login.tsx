@@ -9,15 +9,13 @@ const Login = (): JSX.Element => {
 	const clearInput = () => {
 		setEmail('');
 		setPassword('');
-	}
+	};
 
 	const navigate = useNavigate();
 	const handleLoginSubmit = () => {
-		if (email && password)
-			navigate('/dashboard');
-		else
-			clearInput();
-	}
+		if (email && password) navigate('/dashboard');
+		else clearInput();
+	};
 
 	return (
 		<>

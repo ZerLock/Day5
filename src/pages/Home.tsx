@@ -1,4 +1,4 @@
-import { Center, Text, Button, Link, VStack } from '@chakra-ui/react';
+import { Center, Text, Button, VStack } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 
 const HomePage = (): JSX.Element => {
