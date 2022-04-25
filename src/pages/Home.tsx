@@ -1,8 +1,16 @@
 import { Center, Text, Button, VStack } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const HomePage = (): JSX.Element => {
 	const navigate = useNavigate();
+
+	useEffect(() => {
+		if (localStorage.getItem('accessToken')) {
+			navigate('/dashboard');
+		}
+	}, []);
+
 	return (
 		<>
 			<Center>

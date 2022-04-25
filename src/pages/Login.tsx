@@ -2,9 +2,14 @@ import { useState } from 'react';
 import { Text, Center, Button, Input, VStack } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 
+import { Login as LoginAPI } from '../services/auth';
+import { useToast } from '@chakra-ui/react';
+
 const Login = (): JSX.Element => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+
+	const toast = useToast();
 
 	const clearInput = () => {
 		setEmail('');
@@ -12,9 +17,29 @@ const Login = (): JSX.Element => {
 	};
 
 	const navigate = useNavigate();
-	const handleLoginSubmit = () => {
-		if (email && password) navigate('/dashboard');
-		else clearInput();
+	const handleLoginSubmit = async () => {
+		if (email && password) {
+			const token = await LoginAPI(email, password);
+			if (!token || token === '') {
+				toast({
+					title: 'Login failed',
+					description: 'Please try again',
+					status: 'error',
+					duration: 5000,
+					isClosable: true,
+				});
+				clearInput();
+			} else {
+				localStorage.setItem('accessToken', token);
+				toast({
+					title: 'Login successful',
+					status: 'success',
+					duration: 5000,
+					isClosable: true,
+				});
+				navigate('/dashboard');
+			}
+		} else clearInput();
 	};
 
 	return (

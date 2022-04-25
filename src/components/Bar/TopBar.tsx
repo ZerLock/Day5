@@ -11,7 +11,15 @@ const TopBar = (): JSX.Element => {
 		<Box>
 			<Flex py="2" px="4" borderBottom="1px" align="center">
 				<Stack flex={{ base: 1, md: 'start' }} justify="flex-start" direction="row" spacing="2">
-					<Button leftIcon={<IoIosArrowBack />} colorScheme="teal" variant="solid" onClick={() => navigate('/')}>
+					<Button
+						leftIcon={<IoIosArrowBack />}
+						colorScheme="teal"
+						variant="solid"
+						onClick={() => {
+							localStorage.removeItem('accessToken');
+							navigate('/');
+						}}
+					>
 						Home
 					</Button>
 					<AddArtistButton />

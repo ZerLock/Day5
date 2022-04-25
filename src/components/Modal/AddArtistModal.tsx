@@ -10,7 +10,10 @@ import {
 	Button,
 	Input,
 	ModalContent,
+	useToast,
 } from '@chakra-ui/react';
+
+import { CreateArtist } from '../../services/artist';
 
 type AddModal = {
 	isOpen: boolean;
@@ -24,8 +27,42 @@ const AddArtistModal = ({ isOpen, onClose }: AddModal): JSX.Element => {
 	const [musicGender, setMusicGender] = useState<string>('');
 	const [photoUrl, setPhotoUrl] = useState<string>('');
 
+	const toast = useToast();
+
+	const clearInput = () => {
+		setName('');
+		setRating(0);
+		setNationality('');
+		setMusicGender('');
+		setPhotoUrl('');
+	};
+
 	const validForm = (): boolean =>
 		name !== '' && rating !== 0 && nationality !== '' && musicGender !== '' && photoUrl !== '';
+
+	const handleSubmitCreateArtist = async () => {
+		if (validForm() === true) {
+			const result = await CreateArtist(name, rating, nationality, musicGender, photoUrl);
+			if (result) {
+				toast({
+					title: 'Artist created !',
+					status: 'success',
+					duration: 5000,
+					isClosable: true,
+				});
+				onClose();
+			} else {
+				toast({
+					title: 'Artist creation failed !',
+					description: 'Please try again',
+					status: 'error',
+					duration: 5000,
+					isClosable: true,
+				});
+				clearInput();
+			}
+		}
+	};
 
 	return (
 		<>
@@ -68,7 +105,13 @@ const AddArtistModal = ({ isOpen, onClose }: AddModal): JSX.Element => {
 						<Button id="modal-close-button" colorScheme="teal" variant="solid" onClick={onClose}>
 							Close
 						</Button>
-						<Button id="modal-create-button" colorScheme="teal" variant="solid" disabled={!validForm()}>
+						<Button
+							id="modal-create-button"
+							colorScheme="teal"
+							variant="solid"
+							disabled={!validForm()}
+							onClick={() => handleSubmitCreateArtist()}
+						>
 							Create
 						</Button>
 					</ModalFooter>

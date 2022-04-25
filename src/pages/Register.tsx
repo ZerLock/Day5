@@ -1,11 +1,16 @@
 import { useState } from 'react';
-import { Center, Text, Input, Button, VStack } from '@chakra-ui/react';
+import { Center, Text, Input, Button, VStack, useToast } from '@chakra-ui/react';
+
 import { useNavigate } from 'react-router-dom';
+
+import { Register as RegisterAPI } from '../services/auth';
 
 const Register = (): JSX.Element => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [passwordConfirmation, setPasswordConfirmation] = useState('');
+
+	const toast = useToast();
 
 	const clearInput = () => {
 		setEmail('');
@@ -13,11 +18,35 @@ const Register = (): JSX.Element => {
 		setPasswordConfirmation('');
 	};
 
+	const validForm = (): boolean => email !== '' && password !== '' && passwordConfirmation !== '';
+
 	const navigate = useNavigate();
-	const handleRegisterSubmit = () => {
+	const handleRegisterSubmit = async () => {
 		if (email && password && passwordConfirmation) {
-			if (password === passwordConfirmation) navigate('/dashboard');
-			else clearInput();
+			if (password === passwordConfirmation) {
+				const token = await RegisterAPI(email, password);
+				console.log('token', token);
+				if (!token || token === '') {
+					// toast error
+					toast({
+						title: 'Registration failed',
+						description: 'Please try again',
+						status: 'error',
+						duration: 5000,
+						isClosable: true,
+					});
+					clearInput();
+				} else {
+					localStorage.setItem('accessToken', token);
+					toast({
+						title: 'Registration successful',
+						status: 'success',
+						duration: 5000,
+						isClosable: true,
+					});
+					navigate('/dashboard');
+				}
+			} else clearInput();
 		} else clearInput();
 	};
 
@@ -51,6 +80,7 @@ const Register = (): JSX.Element => {
 						colorScheme="teal"
 						variant="solid"
 						onClick={() => handleRegisterSubmit()}
+						disabled={!validForm()}
 					>
 						Register
 					</Button>
