@@ -65,12 +65,14 @@ const Register = (): JSX.Element => {
 						<Input
 							className="register-input"
 							placeholder="Password"
+							type="password"
 							value={password}
 							onChange={(e) => setPassword(e.target.value)}
 						/>
 						<Input
 							className="register-input"
 							placeholder="Confirmed password"
+							type="password"
 							value={passwordConfirmation}
 							onChange={(e) => setPasswordConfirmation(e.target.value)}
 						/>

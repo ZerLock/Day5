@@ -51,6 +51,7 @@ const Login = (): JSX.Element => {
 					<Input
 						className="login-input"
 						placeholder="Password"
+						type="password"
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 					/>
