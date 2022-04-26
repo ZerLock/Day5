@@ -1,10 +1,46 @@
 import { useState } from 'react';
-import { Text, Center, Button, Input, VStack, Link } from '@chakra-ui/react';
-import { Link as RouteLink } from 'react-router-dom';
+import { Text, Center, Button, Input, VStack } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
+
+import { Login as LoginAPI } from '../services/auth';
+import { useToast } from '@chakra-ui/react';
 
 const Login = (): JSX.Element => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+
+	const toast = useToast();
+
+	const clearInput = () => {
+		setEmail('');
+		setPassword('');
+	};
+
+	const navigate = useNavigate();
+	const handleLoginSubmit = async () => {
+		if (email && password) {
+			const token = await LoginAPI(email, password);
+			if (!token || token === '') {
+				toast({
+					title: 'Login failed',
+					description: 'Please try again',
+					status: 'error',
+					duration: 5000,
+					isClosable: true,
+				});
+				clearInput();
+			} else {
+				localStorage.setItem('accessToken', token);
+				toast({
+					title: 'Login successful',
+					status: 'success',
+					duration: 5000,
+					isClosable: true,
+				});
+				navigate('/dashboard');
+			}
+		} else clearInput();
+	};
 
 	return (
 		<>
@@ -18,21 +54,12 @@ const Login = (): JSX.Element => {
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 					/>
-					<Button
-						id="login-button-login"
-						colorScheme="teal"
-						variant="solid"
-						onClick={() => {
-							console.log(`email: ${email}\npassword: ${password}`);
-						}}
-					>
+					<Button id="login-button-login" colorScheme="teal" variant="solid" onClick={() => handleLoginSubmit()}>
 						Login
 					</Button>
-					<Link as={RouteLink} to="/register">
-						<Button id="login-button-register" colorScheme="teal" variant="solid">
-							Register
-						</Button>
-					</Link>
+					<Button id="login-button-register" colorScheme="teal" variant="solid" onClick={() => navigate('/register')}>
+						Register
+					</Button>
 				</VStack>
 			</Center>
 		</>

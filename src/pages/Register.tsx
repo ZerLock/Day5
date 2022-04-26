@@ -1,11 +1,54 @@
 import { useState } from 'react';
-import { Center, Text, Input, Button, VStack, Link } from '@chakra-ui/react';
-import { Link as RouteLink } from 'react-router-dom';
+import { Center, Text, Input, Button, VStack, useToast } from '@chakra-ui/react';
+
+import { useNavigate } from 'react-router-dom';
+
+import { Register as RegisterAPI } from '../services/auth';
 
 const Register = (): JSX.Element => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [passwordConfirmation, setPasswordConfirmation] = useState('');
+
+	const toast = useToast();
+
+	const clearInput = () => {
+		setEmail('');
+		setPassword('');
+		setPasswordConfirmation('');
+	};
+
+	const validForm = (): boolean => email !== '' && password !== '' && passwordConfirmation !== '';
+
+	const navigate = useNavigate();
+	const handleRegisterSubmit = async () => {
+		if (email && password && passwordConfirmation) {
+			if (password === passwordConfirmation) {
+				const token = await RegisterAPI(email, password);
+				console.log('token', token);
+				if (!token || token === '') {
+					// toast error
+					toast({
+						title: 'Registration failed',
+						description: 'Please try again',
+						status: 'error',
+						duration: 5000,
+						isClosable: true,
+					});
+					clearInput();
+				} else {
+					localStorage.setItem('accessToken', token);
+					toast({
+						title: 'Registration successful',
+						status: 'success',
+						duration: 5000,
+						isClosable: true,
+					});
+					navigate('/dashboard');
+				}
+			} else clearInput();
+		} else clearInput();
+	};
 
 	return (
 		<>
@@ -36,17 +79,14 @@ const Register = (): JSX.Element => {
 						id="register-button-register"
 						colorScheme="teal"
 						variant="solid"
-						onClick={() => {
-							console.log(`email: ${email}\npassword: ${password}\npassword Confirmation: ${passwordConfirmation}`);
-						}}
+						onClick={() => handleRegisterSubmit()}
+						disabled={!validForm()}
 					>
 						Register
 					</Button>
-					<Link as={RouteLink} to="/login">
-						<Button id="register-button-login" colorScheme="teal" variant="solid">
-							Login
-						</Button>
-					</Link>
+					<Button id="register-button-login" colorScheme="teal" variant="solid" onClick={() => navigate('/login')}>
+						Login
+					</Button>
 				</VStack>
 			</Center>
 		</>
