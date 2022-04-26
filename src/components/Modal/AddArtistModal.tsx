@@ -50,6 +50,7 @@ const AddArtistModal = ({ isOpen, onClose }: AddModal): JSX.Element => {
 					duration: 5000,
 					isClosable: true,
 				});
+				clearInput();
 				onClose();
 			} else {
 				toast({

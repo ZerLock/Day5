@@ -11,10 +11,11 @@ const CreateArtist = async (
 	try {
 		const result = await axios({
 			method: 'POST',
-			url: `${BACKEND_URL}/artist`,
+			url: `http://${BACKEND_URL}/artist`,
 			headers: {
 				'Access-Control-Allow-Origin': '*',
 				'Content-Type': 'application/json',
+				accessToken: `${localStorage.getItem('accessToken')}`,
 			},
 			data: {
 				name: name,
